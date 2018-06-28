@@ -3,6 +3,7 @@ extern crate psutil;
 use std::net::UdpSocket;
 use std::net::IpAddr;
 use std::process::Command;
+use std::thread;
 
 const START_PHRASE: &[u8] = b"YatseStart";
 
@@ -30,9 +31,15 @@ fn start_kodi() {
         return;
     }
 
-    if let Err(e) = Command::new("kodi").spawn() {
-        println!("{}", e);
-    }
+    let mut child = match Command::new("kodi").spawn() {
+        Ok(child) => child,
+        Err(e) => {
+            println!("{}", e);
+            return;
+        }
+    };
+
+    thread::spawn(move || child.wait());
 }
 
 fn process_list() -> Vec<psutil::process::Process> {
