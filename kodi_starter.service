@@ -1,0 +1,12 @@
+[Unit]
+Description=Kodi Starter
+
+[Service]
+ExecStart=/usr/bin/kodi_starter
+Restart=always
+User=pi
+Group=pi
+Environment="DISPLAY=:0"
+
+[Install]
+WantedBy=default.target

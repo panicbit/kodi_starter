@@ -1,0 +1,7 @@
+[package]
+name = "kodi_starter"
+version = "0.1.0"
+authors = ["panicbit <panicbit.dev@gmail.com>"]
+
+[dependencies]
+psutil = "1.1.1"
